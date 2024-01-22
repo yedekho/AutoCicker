@@ -3,23 +3,24 @@ import zipfile
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
-import random 
+import random
 
-# Download ChromeDriver
-url = "https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip"
-response = requests.get(url)
+# Download ChromeDriver (optional, if not uploaded to your repo)
+# url = "https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip"
+# response = requests.get(url)
+# with open('chromedriver.zip', 'wb') as f:
+#   f.write(response.content)
 
-with open('chromedriver.zip', 'wb') as f:
-  f.write(response.content)
-
-# Unzip ChromeDriver 
-with zipfile.ZipFile("chromedriver.zip","r") as zip_ref:
-    zip_ref.extractall()
+# Unzip ChromeDriver (optional, if not uploaded to your repo)
+# with zipfile.ZipFile("chromedriver.zip","r") as zip_ref:
+#    zip_ref.extractall()
 
 # Set ChromeDriver location
 chrome_options = webdriver.ChromeOptions()
 chrome_options.headless = True
-chrome_options.binary_location = "./chromedriver"  
+
+# Replace "path/to/chromedriver.exe" with the actual path to your local or repository chromedriver executable
+chrome_options.binary_location = "path/to/chromedriver.exe"
 
 driver = webdriver.Chrome(options=chrome_options)
 
@@ -38,3 +39,5 @@ while True:
   driver.back()
 
   time.sleep(2)
+
+driver.quit() # Close the browser after the bot is done
