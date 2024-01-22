@@ -1,2 +1,2 @@
-selenium
+selenium==4.7.2
 geckodriver-autoinstaller
