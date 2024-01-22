@@ -1,3 +1,2 @@
 selenium
-firefox
 geckodriver-autoinstaller
