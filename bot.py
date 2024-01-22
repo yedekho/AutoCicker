@@ -1,25 +1,29 @@
-from selenium import webdriver
+from selenium import webdriver 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
 import time
 import random
 
-options = Options()
+options = webdriver.ChromeOptions()
 options.headless = True
-
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Chrome(options=options)
 
 while True:
-
+    
+    # Go to initial page
     driver.get("https://shrs.link/0cGhFo")
     
-    links = driver.find_elements(By.CSS_SELECTOR, "a.ob-dynamic-rec-link")
-
+    # Find links containing outbrain URL
+    links = driver.find_elements(By.PARTIAL_LINK_TEXT, "https://paid.outbrain.com")
+    
+    # Pick random link to click
     random_link = random.choice(links)
     random_link.click()
-
-    time.sleep(6)   
-
-    driver.back()
     
+    # Wait 6 seconds
+    time.sleep(6)
+    
+    # Go back
+    driver.back()
+
+    # Wait 2 seconds
     time.sleep(2)
