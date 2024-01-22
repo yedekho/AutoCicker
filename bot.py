@@ -1,29 +1,38 @@
-from selenium import webdriver 
+import requests
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import random
 
-options = webdriver.ChromeOptions()
-options.headless = True
-driver = webdriver.Chrome(options=options)
+# Download ChromeDriver
+url = "https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip"
+response = requests.get(url)
 
+with open('chromedriver.zip', 'wb') as f:
+  f.write(response.content)
+
+!unzip chromedriver.zip
+!chmod +x chromedriver
+
+# Set ChromeDriver location
+chrome_options = webdriver.ChromeOptions()
+chrome_options.headless = True 
+chrome_options.binary_location = "./chromedriver"
+
+driver = webdriver.Chrome(options=chrome_options)
+
+# Bot logic
 while True:
-    
-    # Go to initial page
-    driver.get("https://shrs.link/0cGhFo")
-    
-    # Find links containing outbrain URL
-    links = driver.find_elements(By.PARTIAL_LINK_TEXT, "https://paid.outbrain.com")
-    
-    # Pick random link to click
-    random_link = random.choice(links)
-    random_link.click()
-    
-    # Wait 6 seconds
-    time.sleep(6)
-    
-    # Go back
-    driver.back()
 
-    # Wait 2 seconds
-    time.sleep(2)
+  driver.get("https://shrs.link/0cGhFo")
+
+  links = driver.find_elements(By.PARTIAL_LINK_TEXT, "https://paid.outbrain.com")
+
+  random_link = random.choice(links)
+  random_link.click()
+
+  time.sleep(6)  
+
+  driver.back()
+
+  time.sleep(2)
